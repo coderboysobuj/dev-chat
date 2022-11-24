@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev Chat</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div
+      class="h-screen flex w-full bg-gray-900 text-white items-center justify-center p-4"
+    >
+      <div class="p-4 w-[900px] bg-gray-800 h-full shadow-lg rounded-lg flex">
+        <div class="w-[30%] h-full p-2 border-r">
+          <div class="flex flex-col gap-5">
+            <div class="flex items-center gap-1">
+              <img src="chat.png" alt="logo" class="w-[50px]" />
+              <h1 class="text-3xl font-bold">DevChat</h1>
+            </div>
+
+            <div class="text-lg">
+              <h2>Rome Name:</h2>
+              <h1 class="font-bold ml-5" id="room-name">Javascript</h1>
+            </div>
+            <hr />
+            <div class="text-lg">
+              <h2 class="mb-3">Members:</h2>
+              <div class="ml-4" id="room-members">
+                <!-- All member goese here  -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full h-full p-2 flex flex-col">
+          <div class="flex justify-end">
+            <button
+              id="leave-btn"
+              class="bg-red-700 px-3 py-1 font-bold rounded-lg"
+            >
+              Leave Room
+            </button>
+          </div>
+          <div class="grow p-3 overflow-y-scroll">
+            <div class="flex flex-col p-3 gap-2" id="message-box">
+              <!-- All messages goes here -->
+            </div>
+          </div>
+          <form
+            id="inputForm"
+            class="flex w-full items-center justify-between gap-3"
+          >
+            <input
+              id="input"
+              class="bg-gray-700 border-none outline-none rounded-xl w-full p-2"
+              placeholder="Start typing..."
+            />
+            <button class="px-3 py-2 bg-blue-200 text-black rounded-lg">
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
