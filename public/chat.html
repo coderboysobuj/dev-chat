@@ -10,24 +10,24 @@
   </head>
   <body>
     <div
-      class="h-screen flex w-full bg-gray-900 text-white items-center justify-center p-4"
+      class="h-screen flex w-full bg-gray-900 text-white items-center justify-center p-0 md:p-4"
     >
       <div class="p-4 w-[900px] bg-gray-800 h-full shadow-lg rounded-lg flex">
-        <div class="w-[30%] h-full p-2 border-r">
+        <div class="w-[30%] h-full p-2 border-r border-gray-500">
           <div class="flex flex-col gap-5">
             <div class="flex items-center gap-1">
               <img src="chat.png" alt="logo" class="w-[50px]" />
-              <h1 class="text-3xl font-bold">DevChat</h1>
+              <h1 class="text-3xl font-bold hidden md:block">DevChat</h1>
             </div>
 
-            <div class="text-lg">
+            <div class="md:text-lg">
               <h2>Rome Name:</h2>
-              <h1 class="font-bold ml-5" id="room-name">Javascript</h1>
+              <h1 class="font-bold ml-1 md:ml-5" id="room-name">Javascript</h1>
             </div>
-            <hr />
-            <div class="text-lg">
+            <hr class="border-gray-500" />
+            <div class="md:text-lg">
               <h2 class="mb-3">Members:</h2>
-              <div class="ml-4" id="room-members">
+              <div class="ml-1 md:ml-4" id="room-members">
                 <!-- All member goese here  -->
               </div>
             </div>
@@ -42,10 +42,11 @@
               Leave Room
             </button>
           </div>
-          <div class="grow p-3 overflow-y-scroll">
-            <div class="flex flex-col p-3 gap-2" id="message-box">
-              <!-- All messages goes here -->
-            </div>
+          <div
+            class="grow flex flex-col gap-2 p-5 overflow-y-scroll"
+            id="message-box"
+          >
+            <!-- All messages goes here -->
           </div>
           <form
             id="inputForm"

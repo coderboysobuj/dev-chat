@@ -1,22 +1,38 @@
-import express from "express";
-import http from "http";
-import path from "path";
-import { Server } from "socket.io";
-import moment from "moment";
-import {
+require("dotenv").config();
+
+const express = require("express");
+const http = require("http");
+const path = require("path");
+const { Server } = require("socket.io");
+const { createClient } = require("redis");
+const { createAdapter } = require("@socket.io/redis-adapter");
+
+const {
   getCurrentUser,
   getRoomUsers,
   joinUser,
   userLeave,
-} from "./utils/users";
-import { formatMessage } from "./utils/message";
-import e from "express";
+} = require("./utils/users");
+const { formatMessage } = require("./utils/message");
 
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 const server = http.createServer(app);
 
 const io = new Server(server);
+
+(async () => {
+  try {
+    pubClient = createClient({ url: process.env.REDIS_URL });
+
+    await pubClient.connect();
+    subClient = pubClient.duplicate();
+    io.adapter(createAdapter(pubClient, subClient));
+    console.log("Redis connected");
+  } catch (error) {
+    console.log("Redis connection fail");
+  }
+})();
 
 const bootName = "DevChat";
 
@@ -46,7 +62,7 @@ io.on("connection", (socket) => {
   socket.on("chat-message", (msg) => {
     const user = getCurrentUser(socket.id);
 
-    io.to(user!.room).emit("message", formatMessage(user!.username, msg));
+    io.to(user.room).emit("message", formatMessage(user.username, msg));
   });
 
   // listing for disconnect users
@@ -60,9 +76,9 @@ io.on("connection", (socket) => {
     }
 
     // send updated room info
-    io.to(user!.room).emit("room-users", {
+    io.to(user.room).emit("room-users", {
       room: user?.room,
-      users: getRoomUsers(user!.room),
+      users: getRoomUsers(user.room),
     });
   });
 });

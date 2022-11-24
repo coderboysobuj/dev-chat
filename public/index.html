@@ -8,22 +8,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="flex h-screen w-full justify-center items-center">
+    <div class="flex h-screen w-full justify-center items-center bg-gray-900">
       <form
         method="get"
         action="chat.html"
         class="w-[300px] p-5 flex flex-col gap-3 justify-center items-center"
       >
+        <select name="room" id="room" class="w-full p-2 rounded-lg">
+          <option value="javascript" selected>Javascript</option>
+          <option value="NodeJS">NodeJS</option>
+          <option value="ReactJs">ReactJs</option>
+          <option value="NextJs">NestJs</option>
+          <option value="ExpressJs">ExpressJs</option>
+          <option value="SocketIO">SocketIO</option>
+        </select>
+
         <input
           name="username"
-          class="w-full border p-2"
+          class="w-full border p-2 rounded-lg"
           placeholder="Enter you name"
-        />
-        <input
-          name="room"
-          class="w-full border p-2"
-          type="text"
-          placeholder="Enter room id"
         />
         <button
           class="bg-blue-400 w-full rounded-xl p-2 font-xl text-white font-bold"
