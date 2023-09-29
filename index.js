@@ -4,8 +4,7 @@ const express = require("express");
 const http = require("http");
 const path = require("path");
 const { Server } = require("socket.io");
-const { createClient } = require("redis");
-const { createAdapter } = require("@socket.io/redis-adapter");
+
 
 const {
   getCurrentUser,
@@ -20,19 +19,6 @@ app.use(express.static(path.join(__dirname, "public")));
 const server = http.createServer(app);
 
 const io = new Server(server);
-
-(async () => {
-  try {
-    pubClient = createClient({ url: process.env.REDIS_URL });
-
-    await pubClient.connect();
-    subClient = pubClient.duplicate();
-    io.adapter(createAdapter(pubClient, subClient));
-    console.log("Redis connected");
-  } catch (error) {
-    console.log("Redis connection fail");
-  }
-})();
 
 const bootName = "DevChat";
 
